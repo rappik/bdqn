@@ -65,7 +65,12 @@
     <script>
         async function capturePage() {
             try {
-                const stream = await navigator.mediaDevices.getDisplayMedia({ video: { cursor: "always" } });
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: {
+                        displaySurface: 'monitor',
+                        cursor: 'always'
+                    }
+                });
                 const track = stream.getVideoTracks()[0];
                 const imageCapture = new ImageCapture(track);
                 const bitmap = await imageCapture.grabFrame();
