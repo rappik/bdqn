@@ -38,21 +38,7 @@
             border: none;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-        .capture-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            font-size: 20px;
-        }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="header">
@@ -61,21 +47,5 @@
     <div class="container">
         <iframe title="Dashboard Tuần 51" src="https://app.powerbi.com/view?r=eyJrIjoiMTI3YzFmNTgtMDMyNi00ZTJiLWExMTAtMzBkZDE3ZDQzNTgwIiwidCI6IjRkNmQ2N2FlLTViNTUtNDJhYy05ZGFhLTkzOTk3Yzc3YTg3YSIsImMiOjEwfQ%3D%3D" allowFullScreen="true"></iframe>
     </div>
-    <button class="capture-btn" onclick="capturePage()">📸</button>
-    <script>
-        async function capturePage() {
-            try {
-                const canvas = await html2canvas(document.body);
-                canvas.toBlob(blob => {
-                    const item = new ClipboardItem({ "image/png": blob });
-                    navigator.clipboard.write([item]);
-                    alert("Ảnh đã được lưu vào clipboard!");
-                });
-            } catch (err) {
-                console.error("Error: " + err);
-                alert("Không thể chụp ảnh màn hình: " + err.message);
-            }
-        }
-    </script>
 </body>
 </html>
