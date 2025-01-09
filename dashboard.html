@@ -38,7 +38,20 @@
             border: none;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
+        .capture-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="header">
@@ -47,5 +60,17 @@
     <div class="container">
         <iframe title="Dashboard Tuần 51" src="https://app.powerbi.com/view?r=eyJrIjoiMTI3YzFmNTgtMDMyNi00ZTJiLWExMTAtMzBkZDE3ZDQzNTgwIiwidCI6IjRkNmQ2N2FlLTViNTUtNDJhYy05ZGFhLTkzOTk3Yzc3YTg3YSIsImMiOjEwfQ%3D%3D" allowFullScreen="true"></iframe>
     </div>
+    <button class="capture-btn" onclick="capturePage()">Chụp ảnh trang</button>
+    <script>
+        function capturePage() {
+            html2canvas(document.body).then(canvas => {
+                canvas.toBlob(blob => {
+                    const item = new ClipboardItem({ "image/png": blob });
+                    navigator.clipboard.write([item]);
+                    alert("Ảnh đã được lưu vào clipboard!");
+                });
+            });
+        }
+    </script>
 </body>
 </html>
