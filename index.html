@@ -35,17 +35,38 @@
             border-radius: 8px;
             margin: 20px 0;
         }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin: 0 5px;
+            font-size: 16px;
+        }
+        .tab.active {
+            background-color: #388E3C;
+        }
         .container {
             width: 90%;
             max-width: 1200px;
-            margin: 20px 0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
+            display: none;
+        }
+        .container.active {
+            display: block;
         }
         iframe {
             width: 100%;
-            height: 600px;
+            height: calc(100vh - 200px); /* Adjust height based on header and tabs height */
             border: none;
         }
     </style>
@@ -54,11 +75,29 @@
     <div class="header">
         Dashboard Khách hàng mới Bưu điện Quảng Nam
     </div>
-    <div class="container">
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('powerbi')">PowerBI</button>
+        <button class="tab" onclick="showTab('looker')">Looker</button>
+    </div>
+    <div id="powerbi" class="container active">
         <iframe title="Dashboard Tuần 51" src="https://app.powerbi.com/view?r=eyJrIjoiMTI3YzFmNTgtMDMyNi00ZTJiLWExMTAtMzBkZDE3ZDQzNTgwIiwidCI6IjRkNmQ2N2FlLTViNTUtNDJhYy05ZGFhLTkzOTk3Yzc3YTg3YSIsImMiOjEwfQ%3D%3D" allowFullScreen="true"></iframe>
     </div>
-    <div class="container">
+    <div id="looker" class="container">
         <iframe title="Dashboard Tuần 51" src="https://lookerstudio.google.com/embed/reporting/458d28c2-14a1-4c51-8fb9-2189133b8825/page/aQHaE" allowFullScreen="true"></iframe>
     </div>
+    <script>
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab');
+            const containers = document.querySelectorAll('.container');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            containers.forEach(container => {
+                container.classList.remove('active');
+            });
+            document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
