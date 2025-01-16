@@ -24,20 +24,21 @@
             flex-direction: column;
             align-items: center;
         }
-        .header {
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
             background-color: #4CAF50;
             color: white;
             padding: 5px 10px; /* Reduced padding */
-            text-align: center;
-            font-size: 20px; /* Reduced font size */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
+        }
+        .header {
+            font-size: 20px; /* Reduced font size */
         }
         .tabs {
             display: flex;
-            justify-content: center;
-            margin: 10px 0;
-            width: 100%;
         }
         .tab {
             padding: 10px 20px;
@@ -71,12 +72,14 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        Dashboard Khách hàng mới Bưu điện Quảng Nam
-    </div>
-    <div class="tabs">
-        <button class="tab" onclick="showTab('powerbi')">PowerBI</button>
-        <button class="tab active" onclick="showTab('looker')">Looker</button>
+    <div class="header-container">
+        <div class="tabs">
+            <button class="tab" onclick="showTab('powerbi')">PowerBI</button>
+            <button class="tab active" onclick="showTab('looker')">Looker</button>
+        </div>
+        <div class="header">
+            Dashboard Khách hàng mới Bưu điện Quảng Nam
+        </div>
     </div>
     <div id="powerbi" class="container">
         <iframe title="Dashboard Tuần 51" src="https://app.powerbi.com/view?r=eyJrIjoiMTI3YzFmNTgtMDMyNi00ZTJiLWExMTAtMzBkZDE3ZDQzNTgwIiwidCI6IjRkNmQ2N2FlLTViNTUtNDJhYy05ZGFhLTkzOTk3Yzc3YTg3YSIsImMiOjEwfQ%3D%3D" allowFullScreen="true"></iframe>
