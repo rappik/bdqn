@@ -19,24 +19,34 @@
             height: 100%;
             width: 100%;
             font-family: 'Aptos', Arial, sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         .header {
             background-color: #4CAF50;
             color: white;
-            padding: 7.5px; /* Reduced padding to half */
+            padding: 10px 20px;
             text-align: center;
             font-size: 24px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 20px 0;
         }
         .container {
-            padding: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
         iframe {
             width: 100%;
-            height: calc(100vh - 45px); /* Adjust height based on reduced header height */
+            height: 600px;
             border: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -47,7 +57,6 @@
     <div class="container">
         <iframe title="Dashboard Tuần 51" src="https://app.powerbi.com/view?r=eyJrIjoiMTI3YzFmNTgtMDMyNi00ZTJiLWExMTAtMzBkZDE3ZDQzNTgwIiwidCI6IjRkNmQ2N2FlLTViNTUtNDJhYy05ZGFhLTkzOTk3Yzc3YTg3YSIsImMiOjEwfQ%3D%3D" allowFullScreen="true"></iframe>
     </div>
-
     <div class="container">
         <iframe title="Dashboard Tuần 51" src="https://lookerstudio.google.com/embed/reporting/458d28c2-14a1-4c51-8fb9-2189133b8825/page/aQHaE" allowFullScreen="true"></iframe>
     </div>
