@@ -60,14 +60,17 @@
             border-radius: 8px;
             overflow: hidden;
             display: none;
+            flex-grow: 1; /* Allow container to grow and fill available space */
         }
         .container.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
         }
         iframe {
             width: 100%;
-            height: calc(100vh - 100px); /* Adjust height based on reduced header height */
+            height: 100%; /* Adjust height to fill the container */
             border: none;
+            flex-grow: 1; /* Allow iframe to grow and fill available space */
         }
     </style>
 </head>
