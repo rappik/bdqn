@@ -13,64 +13,118 @@
             font-weight: normal;
             font-style: normal;
         }
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1d4ed8;
+            --background-color: #f8fafc;
+            --text-color: #1e293b;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             width: 100%;
-            font-family: 'Aptos', Arial, sans-serif;
-            background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+            font-family: 'Aptos', system-ui, -apple-system, sans-serif;
+            background: var(--background-color);
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: var(--text-color);
         }
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            background-color: #4CAF50;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 5px 10px; /* Reduced padding */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .header {
-            font-size: 20px; /* Reduced font size */
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         .tabs {
             display: flex;
+            gap: 1rem;
         }
         .tab {
-            padding: 10px 20px;
+            padding: 0.75rem 1.5rem;
             cursor: pointer;
-            background-color: #4CAF50;
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
             border: none;
-            border-radius: 8px;
-            margin: 0 5px;
-            font-size: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .tab:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
         .tab.active {
-            background-color: #388E3C;
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .container {
-            width: 100%;
-            max-width: 1200px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            width: 95%;
+            max-width: 1400px;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
             overflow: hidden;
             display: none;
-            flex-grow: 1; /* Allow container to grow and fill available space */
+            flex-grow: 1;
+            position: relative;
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .container.active {
             display: flex;
             flex-direction: column;
+            animation: fadeIn 0.3s ease-in-out;
         }
         iframe {
             width: 100%;
-            height: 100%; /* Adjust height to fill the container */
+            height: 100%;
             border: none;
-            flex-grow: 1; /* Allow iframe to grow and fill available space */
+            flex-grow: 1;
+            border-radius: 16px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            .header {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+            .tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -94,12 +148,10 @@
         function showTab(tabId) {
             const tabs = document.querySelectorAll('.tab');
             const containers = document.querySelectorAll('.container');
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-            });
-            containers.forEach(container => {
-                container.classList.remove('active');
-            });
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            containers.forEach(container => container.classList.remove('active'));
+            
             document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
             document.getElementById(tabId).classList.add('active');
         }
