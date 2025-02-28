@@ -24,7 +24,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 0.5rem 1rem; /* Giảm padding */
             background: linear-gradient(135deg, #2563eb, #4267ce);
             color: white;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -34,23 +34,23 @@
         }
 
         .title {
-            font-size: 1.5rem;
+            font-size: 1.2rem; /* Giảm kích thước font */
             font-weight: 600;
         }
 
         .tabs {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem; /* Giảm khoảng cách giữa các tab */
         }
 
         .tab {
-            padding: 0.75rem 1.5rem;
+            padding: 0.5rem 1rem; /* Giảm padding */
             border: none;
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.1);
             color: white;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.9rem; /* Giảm kích thước font */
             transition: all 0.3s ease;
             text-decoration: none;
         }
@@ -68,7 +68,7 @@
         .dashboard-container {
             width: 98%;
             max-width: 1400px;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 60px); /* Tăng chiều cao iframe */
             margin: 0.5rem auto;
             background: white;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
@@ -89,18 +89,18 @@
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
+                padding: 0.5rem;
+                gap: 0.5rem;
             }
 
             .title {
-                font-size: 1.2rem;
+                font-size: 1rem;
                 text-align: center;
             }
 
             .tab {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
+                padding: 0.3rem 0.8rem;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -129,20 +129,17 @@
             looker: "https://lookerstudio.google.com/embed/reporting/458d28c2-14a1-4c51-8fb9-2189133b8825/page/aQHaE"
         };
 
-        // Lấy tab từ URL hoặc mặc định là 'looker'
         const getActiveTab = () => {
             const params = new URLSearchParams(window.location.search);
             return params.get('tab') || 'looker';
         };
 
-        // Cập nhật URL khi chuyển tab
         const updateURL = (tab) => {
             const url = new URL(window.location);
             url.searchParams.set('tab', tab);
             window.history.pushState({}, '', url);
         };
 
-        // Cập nhật iframe và trạng thái active
         const updateDashboard = (tab) => {
             const iframe = document.getElementById('dashboard-frame');
             iframe.src = urls[tab];
@@ -158,7 +155,6 @@
             });
         };
 
-        // Xử lý click tab
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 const tabName = tab.dataset.tab;
@@ -167,7 +163,6 @@
             });
         });
 
-        // Khởi tạo dashboard với tab active
         const activeTab = getActiveTab();
         updateDashboard(activeTab);
         document.querySelector(`[data-tab="${activeTab}"]`).classList.add('active');
