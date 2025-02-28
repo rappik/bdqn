@@ -2,13 +2,175 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=index.php">
-    <title>Chuyển hướng...</title>
-    <script>
-        window.location.href = "index.php";
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard BDQN</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #2563eb, #4267ce);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-container {
+            width: 98%;
+            max-width: 1400px;
+            height: calc(100vh - 120px);
+            margin: 0.5rem auto;
+            background: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            flex-grow: 1;
+        }
+
+        .dashboard-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .title {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+
+            .tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <p>Nếu bạn không được chuyển hướng tự động, vui lòng <a href="index.php">click vào đây</a>.</p>
+    <header class="header">
+        <h1 class="title">Dashboard Khách hàng mới Bưu điện Quảng Nam</h1>
+        <nav class="tabs">
+            <button class="tab" data-tab="powerbi">PowerBI</button>
+            <button class="tab" data-tab="looker">Looker</button>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <iframe 
+            id="dashboard-frame"
+            class="dashboard-iframe"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+    </main>
+
+    <script>
+        const urls = {
+            powerbi: "https://app.powerbi.com/view?r=eyJrIjoiYmQ4ZmQ2MTYtNmUxMC00Y2U1LWEzZWQtMjAzZWY3N2IzZTBjIiwidCI6IjRkNmQ2N2FlLTViNTUtNDJhYy05ZGFhLTkzOTk3Yzc3YTg3YSIsImMiOjEwfQ%3D%3D",
+            looker: "https://lookerstudio.google.com/embed/reporting/458d28c2-14a1-4c51-8fb9-2189133b8825/page/aQHaE"
+        };
+
+        // Lấy tab từ URL hoặc mặc định là 'looker'
+        const getActiveTab = () => {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('tab') || 'looker';
+        };
+
+        // Cập nhật URL khi chuyển tab
+        const updateURL = (tab) => {
+            const url = new URL(window.location);
+            url.searchParams.set('tab', tab);
+            window.history.pushState({}, '', url);
+        };
+
+        // Cập nhật iframe và trạng thái active
+        const updateDashboard = (tab) => {
+            const iframe = document.getElementById('dashboard-frame');
+            iframe.src = urls[tab];
+            
+            if (tab === 'looker') {
+                iframe.setAttribute('sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+            } else {
+                iframe.removeAttribute('sandbox');
+            }
+
+            document.querySelectorAll('.tab').forEach(t => {
+                t.classList.toggle('active', t.dataset.tab === tab);
+            });
+        };
+
+        // Xử lý click tab
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                updateURL(tabName);
+                updateDashboard(tabName);
+            });
+        });
+
+        // Khởi tạo dashboard với tab active
+        const activeTab = getActiveTab();
+        updateDashboard(activeTab);
+        document.querySelector(`[data-tab="${activeTab}"]`).classList.add('active');
+    </script>
 </body>
 </html> 
