@@ -1,39 +1,24 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
+const DashboardContainer = styled.div`
   width: 98%;
   max-width: 1400px;
+  height: calc(100vh - 120px);
   margin: 0.5rem auto;
   background: white;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   border-radius: 16px;
   overflow: hidden;
-  display: ${props => props.active ? 'flex' : 'none'};
-  flex-direction: column;
-  flex-grow: 1;
+  display: ${props => props.active ? 'block' : 'none'};
   position: relative;
-  backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  animation: ${props => props.active ? 'fadeIn 0.3s ease-in-out' : 'none'};
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 `;
 
 const StyledIframe = styled.iframe`
   width: 100%;
   height: 100%;
   border: none;
-  flex-grow: 1;
-  border-radius: 16px;
+  display: block;
 `;
 
 const Dashboard = ({ type, active }) => {
@@ -43,14 +28,14 @@ const Dashboard = ({ type, active }) => {
   };
 
   return (
-    <Container active={active}>
+    <DashboardContainer active={active}>
       <StyledIframe
-        title="Dashboard Tuần"
+        title={`${type} Dashboard`}
         src={urls[type]}
         allowFullScreen
         sandbox={type === 'looker' ? "allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" : ""}
       />
-    </Container>
+    </DashboardContainer>
   );
 };
 

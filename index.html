@@ -1,160 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Khách hàng mới Bưu điện Quảng Nam</title>
-    <link rel="icon" href="Logo.png" type="image/png">
-    <style>
-        @font-face {
-            font-family: 'Aptos';
-            src: url('path/to/aptos-font.woff2') format('woff2'),
-                 url('path/to/aptos-font.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #4267ce;
-            --background-color: #f8fafc;
-            --text-color: #1e293b;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-        }
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            font-family: 'Aptos', system-ui, -apple-system, sans-serif;
-            background: var(--background-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-color);
-        }
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 4px 20px var(--shadow-color);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .header {
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .tabs {
-            display: flex;
-            gap: 1rem;
-        }
-        .tab {
-            padding: 0.75rem 1.5rem;
-            cursor: pointer;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-        .tab:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        .tab.active {
-            background-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .container {
-            width: 98%;
-            max-width: 1400px;
-            margin: 0.5rem auto;
-            background: white;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-            border-radius: 16px;
-            overflow: hidden;
-            display: none;
-            flex-grow: 1;
-            position: relative;
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .container.active {
-            display: flex;
-            flex-direction: column;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            flex-grow: 1;
-            border-radius: 16px;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-            }
-            .header {
-                font-size: 1.2rem;
-                text-align: center;
-            }
-            .tab {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="header-container">
-        <div class="header">
-            Dashboard Khách hàng mới Bưu điện Quảng Nam
-        </div>
-        <div class="tabs">
-            <button class="tab" onclick="showTab('powerbi')">PowerBI</button>
-            <button class="tab active" onclick="showTab('looker')">Looker</button>
-        </div>
-    </div>
-    <div id="powerbi" class="container">
-        <iframe title="Dashboard Tuần" src="https://app.powerbi.com/view?r=eyJrIjoiYmQ4ZmQ2MTYtNmUxMC00Y2U1LWEzZWQtMjAzZWY3N2IzZTBjIiwidCI6IjRkNmQ2N2FlLTViNTUtNDJhYy05ZGFhLTkzOTk3Yzc3YTg3YSIsImMiOjEwfQ%3D%3D" allowFullScreen="true"></iframe>
-    </div>
-    <div id="looker" class="container active">
-        <iframe title="Dashboard Tuần" src="https://lookerstudio.google.com/embed/reporting/458d28c2-14a1-4c51-8fb9-2189133b8825/page/aQHaE" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
-    </div>
-    <script>
-        function showTab(tabId) {
-            const tabs = document.querySelectorAll('.tab');
-            const containers = document.querySelectorAll('.container');
-            
-            tabs.forEach(tab => tab.classList.remove('active'));
-            containers.forEach(container => container.classList.remove('active'));
-            
-            document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        }
-    </script>
-</body>
-</html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta
+      name="description"
+      content="Dashboard Khách hàng mới Bưu điện Quảng Nam"
+    />
+    <title>Dashboard BDQN</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html> 
